@@ -71,7 +71,7 @@ def build_simplest_OLS_model(all_independent_dims, data, dependent_dim = 'y'):
          dependent variable
         dependent_dim: a string with the name of the column of the dependent variable i.e. the output
     Returns:
-        the OLS model
+        the OLS model and the list of selected input dimensions
     Raises:
         assert exceptions: for invalid inputs
     """
@@ -79,7 +79,7 @@ def build_simplest_OLS_model(all_independent_dims, data, dependent_dim = 'y'):
     (best_input_dims, model) = find_important_OLS_features(all_independent_dims, data, dependent_dim)
     if len(best_input_dims)==len(all_independent_dims):
         print("Found simplest model to have %d degrees of freedom." % len(best_input_dims))
-        return model
+        return (model, best_input_dims)
     else:
         print("Reducing degrees of freedom from %d to %d." % (len(all_independent_dims), len(best_input_dims)))
         return build_simplest_OLS_model(best_input_dims, data, dependent_dim)
